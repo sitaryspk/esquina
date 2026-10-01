@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Esquina — o mapa da coisa brasileira</title>
+<meta name="theme-color" content="#C4451A"/>
+<meta name="description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro em Lisboa. E o primeiro mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
+<meta property="og:title" content="Esquina — o mapa da coisa brasileira"/>
+<meta property="og:description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro em Lisboa. E o primeiro mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="pt_BR"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Esquina — o mapa da coisa brasileira"/>
+<meta name="twitter:description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro em Lisboa. E o primeiro mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
+<link rel="icon" href="assets/favicon.png" type="image/png"/>
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<style>
+:root{--cream:#F6E8D4;--paper:#FBF4EA;--ink:#1C140E;--muted:#5A4636;--terra:#C4451A;--terra-d:#9A2E10;--gold:#C9A227;--chip:#EFE0C8}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);font-family:Outfit,system-ui,sans-serif}
+body{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+header{background:var(--cream);border-bottom:1px solid #e4d2b4;padding:10px 14px 8px;z-index:800}
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.top img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--cream);border:1px solid #e4d2b4;flex:none}
+.brand{min-width:0}
+.top h1{font-family:Fraunces,Georgia,serif;font-size:22px;margin:0;line-height:1}
+.top small{display:block;color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.regions{margin-left:auto;display:flex;gap:6px}
+.regions button{border:0;background:var(--chip);color:var(--ink);padding:8px 12px;border-radius:999px;font:600 13px Outfit,sans-serif;cursor:pointer}
+.regions button.on{background:var(--terra);color:#fff}
+.search{margin:10px 0 8px}
+.search input{width:100%;border:1px solid #e0cba8;background:#fff;border-radius:12px;padding:10px 12px;font:500 16px Outfit,sans-serif;color:var(--ink)}
+.filters,.metros{display:flex;gap:7px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+.filters button,.metros button{border:0;background:var(--chip);color:var(--ink);padding:7px 12px;border-radius:999px;font:500 13px Outfit,sans-serif;white-space:nowrap;cursor:pointer}
+.filters button.on,.metros button.on{background:var(--ink);color:var(--paper)}
+.metros{display:none}
+.metros.show{display:flex}
+.how{display:flex;gap:8px;padding:8px 14px;background:#fff8ee;border-bottom:1px solid #efe3d0;font-size:12px;color:var(--muted)}
+.how div{flex:1;min-width:0}
+.how b{display:block;color:var(--ink);font-size:12px}
+#map{flex:1;min-height:0}
+.sheet{background:var(--paper);border-top:1px solid #e4d2b4;height:32vh;height:32dvh;overflow:auto}
+.sheet-count{position:sticky;top:0;background:var(--cream);color:var(--muted);font-size:12px;padding:6px 14px;border-bottom:1px solid #efe3d0;z-index:2}
+.card{padding:11px 14px;border-bottom:1px solid #efe3d0;cursor:pointer;display:grid;grid-template-columns:10px 1fr;gap:10px}
+.card:hover{background:#fff8ee}
+.dot{width:10px;height:10px;border-radius:50%;margin-top:6px}
+.card h3{margin:0;font-size:15px;font-weight:600}
+.meta{color:var(--muted);font-size:12px;margin-top:2px}
+.feat{font-size:10px;color:var(--terra-d);font-weight:700;letter-spacing:.06em;margin-top:3px}
+.approx{font-size:11px;color:#8a5a32;margin-top:3px}
+footer{background:var(--ink);color:var(--cream);padding:12px 14px calc(12px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;gap:10px;align-items:center}
+footer p{margin:0;font-size:13px;line-height:1.3}
+footer strong{font-family:Fraunces,serif}
+.cta{background:var(--terra);color:#fff;border:0;cursor:pointer;padding:10px 14px;border-radius:999px;font:600 13px Outfit,sans-serif;white-space:nowrap}
+.leaflet-popup-content-wrapper{border-radius:14px;font-family:Outfit,sans-serif}
+.pop h3{margin:0 0 4px;font-size:16px}
+.pop p{margin:0 0 8px;color:#5a4636;font-size:13px}
+.pop a{color:var(--terra-d);font-weight:600;font-size:13px;margin-right:10px}
+.pin{width:16px;height:16px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.pin.feat{width:20px;height:20px;box-shadow:0 0 0 2px var(--gold)}
+.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(196,69,26,.18)}
+.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background:#C4451A;color:#fff}
+.empty{padding:22px 16px;text-align:center;color:var(--muted);font-size:14px;line-height:1.45}
+dialog{border:0;border-radius:16px;padding:18px 16px 16px;background:var(--paper);color:var(--ink);max-width:440px;width:calc(100% - 28px);box-shadow:0 16px 50px rgba(28,20,14,.28)}
+dialog::backdrop{background:rgba(28,20,14,.45)}
+dialog h2{font-family:Fraunces,Georgia,serif;font-size:24px;margin:0 0 8px}
+dialog p{margin:0 0 10px;color:var(--muted);font-size:14px;line-height:1.4}
+dialog textarea{width:100%;min-height:92px;border:1px solid #e0cba8;border-radius:12px;padding:10px 12px;font:500 16px Outfit,sans-serif;background:#fff;color:var(--ink);resize:vertical}
+.dialog-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap}
+.ghost{border:0;background:var(--chip);color:var(--ink);padding:10px 14px;border-radius:999px;font:600 13px Outfit,sans-serif;cursor:pointer}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <img src="assets/mark.png" alt=""/>
+    <div class="brand">
+      <h1>Esquina</h1>
+      <small id="place-label">Lisboa</small>
+    </div>
+    <div class="regions" id="regions" role="group" aria-label="Mapa"></div>
+  </div>
+  <div class="search">
+    <label class="sr" for="q">Buscar por nome, bairro ou cidade</label>
+    <input id="q" type="search" placeholder="Nome, bairro ou cidade — padaria, açaí, salão…" autocomplete="off" enterkeyhint="search"/>
+  </div>
+  <div class="metros" id="metros" role="group" aria-label="Cidades nos EUA"></div>
+  <div class="filters" id="filters" role="group" aria-label="Categorias"></div>
+</header>
+<div class="how">
+  <div><b>1. Abre o mapa</b>Lisboa primeiro. EUA também.</div>
+  <div><b>2. Entra de graça</b>Padaria, açaí, salão, mercearia.</div>
+  <div><b>3. Destaque 29€</b>Pin no topo do bairro.</div>
+</div>
+<div id="map"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-count" id="count">Abrindo o mapa…</div>
+  <div id="list"></div>
+</div>
+<footer>
+  <p><strong>Tem negócio?</strong><br/>Grátis no mapa. Destaque: 29€/mês.</p>
+  <button class="cta" id="cta" type="button">Quero meu pin</button>
+</footer>
+<dialog id="pedido" aria-labelledby="pedido-titulo">
+  <h2 id="pedido-titulo">Quero meu pin</h2>
+  <p>O contato público, por agora, é este site. Ainda não tem número de WhatsApp nem e-mail.</p>
+  <p>Copia a mensagem. Quando existir um contato, ela já está pronta. O destaque de 29€/mês fica só no texto: aqui não tem pagamento.</p>
+  <textarea id="pedido-msg">Oi! Vi o Esquina e quero o pin do meu negócio em Lisboa.</textarea>
+  <div class="dialog-actions">
+    <button class="ghost" id="fechar" type="button">Fechar</button>
+    <button class="cta" id="copiar" type="button">Copiar mensagem</button>
+  </div>
+</dialog>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script>
+const CONFIG = { whatsapp: "" };
+const MSG = "Oi! Vi o Esquina e quero o pin do meu negócio em Lisboa.";
+const COLORS = {Comer:"#C4451A",Mercado:"#C9A227",Beleza:"#9B3D6E",Saúde:"#2A5A3A",Serviços:"#3D4E6B","Rolê":"#6B3FA0"};
+const CATS = ["Todos","Comer","Mercado","Beleza","Saúde","Serviços","Rolê"];
+const METRO_ORDER = ["Boston","Nova York","Miami","Orlando"];
+let PINS = [];
+let region = "lisboa";
+let metro = "todas";
+let current = "Todos";
+let query = "";
+
+const map = L.map("map",{zoomControl:false}).setView([38.73,-9.15],12);
+L.control.zoom({position:"topright"}).addTo(map);
+L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",{
+  attribution:"&copy; OSM &copy; CARTO", maxZoom:19
+}).addTo(map);
+const cluster = L.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:42,spiderfyOnMaxZoom:true});
+map.addLayer(cluster);
+
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
+}
+function norm(s){
+  return String(s ?? "").toLowerCase().normalize("NFD").replace(/\p{M}/gu, "");
+}
+function isApprox(p){ return p.geo_src !== "nominatim"; }
+function linkFor(p){
+  if (p.site) return p.site;
+  if (p.instagram) return "https://instagram.com/" + p.instagram.replace("@","");
+  return "";
+}
+function mapsUrl(p){
+  const bits = [p.endereco || p.nome, p.cidade, p.regiao === "eua" ? "USA" : "Portugal"].filter(Boolean);
+  return "https://maps.google.com/?q=" + encodeURIComponent(bits.join(", "));
+}
+function placeLine(p){
+  const bits = [p.categoria, p.cidade];
+  if (p.bairro && norm(p.bairro) !== norm(p.cidade)) bits.push(p.bairro);
+  return bits.join(" · ");
+}
+function iconFor(p){
+  const c = COLORS[p.categoria] || "#C4451A";
+  return L.divIcon({
+    className:"",
+    html:`<div class="pin${p.featured ? " feat" : ""}" style="background:${c}"></div>`,
+    iconSize:[22,22], iconAnchor:[11,20], popupAnchor:[0,-16]
+  });
+}
+function popup(p){
+  const l = linkFor(p);
+  const end = p.endereco ? `<br>${esc(p.endereco)}` : "";
+  const approx = isApprox(p) ? `<br><span class="approx">Localização aproximada</span>` : "";
+  return `<div class="pop"><h3>${esc(p.nome)}</h3><p>${esc(placeLine(p))}${end}${approx}<br>${esc(p.por || "")}</p>
+    <a href="${mapsUrl(p)}" target="_blank" rel="noopener">Como chegar</a>
+    ${l ? `<a href="${esc(l)}" target="_blank" rel="noopener">Abrir</a>` : ""}</div>`;
+}
+function inRegion(p){
+  if (p.regiao !== region) return false;
+  if (region === "eua" && metro !== "todas" && p.metro !== metro) return false;
+  return true;
+}
+function matchesQuery(p){
+  const q = norm(query.trim());
+  if (!q) return true;
+  const blob = norm([p.nome, p.bairro, p.cidade, p.metro, p.endereco, p.categoria, p.por].join(" "));
+  return blob.includes(q);
+}
+function scoped(){
+  return PINS.filter(p => inRegion(p) && matchesQuery(p));
+}
+function filtered(){
+  return scoped()
+    .filter(p => current === "Todos" || p.categoria === current)
+    .sort((a,b) => (b.featured - a.featured) || a.nome.localeCompare(b.nome, "pt"));
+}
+function lugarLabel(n){
+  if (n === 0) return "Nenhum lugar";
+  if (n === 1) return "1 lugar";
+  return n + " lugares";
+}
+function emptyCopy(){
+  if (region === "eua") return "Nada neste lado do mapa. Tenta padaria, açaí, mercearia, Newark ou Orlando.";
+  return "Nada por aqui. Tenta padaria, açaí, salão, dentista, mercearia ou outro bairro.";
+}
+let markers = {};
+function render(){
+  cluster.clearLayers();
+  markers = {};
+  const list = document.getElementById("list");
+  const items = filtered();
+  document.getElementById("count").textContent = lugarLabel(items.length);
+  const tudo = document.querySelector('#filters button[data-cat="Todos"]');
+  if (tudo) tudo.textContent = "Tudo · " + scoped().length;
+  list.innerHTML = "";
+  if (!items.length){
+    list.innerHTML = `<div class="empty">${emptyCopy()}</div>`;
+    return;
+  }
+  items.forEach(p => {
+    const m = L.marker([p.lat, p.lon], {icon: iconFor(p), zIndexOffset: p.featured ? 400 : 0});
+    m.bindPopup(popup(p));
+    cluster.addLayer(m);
+    markers[p.id] = m;
+    const el = document.createElement("div");
+    el.className = "card";
+    el.innerHTML = `<span class="dot" style="background:${COLORS[p.categoria] || "#C4451A"}"></span>
+      <div><h3>${esc(p.nome)}</h3>
+      <div class="meta">${esc(placeLine(p))}${p.endereco ? " · " + esc(p.endereco) : ""}</div>
+      ${isApprox(p) ? '<div class="approx">Localização aproximada</div>' : ""}
+      ${p.featured ? '<div class="feat">DESTAQUE</div>' : ""}</div>`;
+    el.onclick = () => {
+      const marker = markers[p.id];
+      cluster.zoomToShowLayer(marker, () => marker.openPopup());
+    };
+    list.appendChild(el);
+  });
+}
+function fitRegion(){
+  const items = PINS.filter(inRegion);
+  if (!items.length){
+    map.setView(region === "lisboa" ? [38.73, -9.15] : [35, -82], region === "lisboa" ? 11 : 4);
+    return;
+  }
+  if (items.length === 1){
+    map.setView([items[0].lat, items[0].lon], 14);
+    return;
+  }
+  map.fitBounds(L.latLngBounds(items.map(p => [p.lat, p.lon])).pad(0.22), {maxZoom: 13});
+}
+function paintRegions(){
+  const box = document.getElementById("regions");
+  box.innerHTML = "";
+  [["lisboa","Lisboa"],["eua","EUA"]].forEach(([id, label]) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = label;
+    b.className = id === region ? "on" : "";
+    b.setAttribute("aria-pressed", id === region ? "true" : "false");
+    b.onclick = () => {
+      if (region === id) return;
+      region = id;
+      metro = "todas";
+      document.getElementById("place-label").textContent = id === "lisboa" ? "Lisboa" : "EUA";
+      paintRegions();
+      paintMetros();
+      render();
+      fitRegion();
+    };
+    box.appendChild(b);
+  });
+}
+function paintMetros(){
+  const box = document.getElementById("metros");
+  const present = METRO_ORDER.filter(name => PINS.some(p => p.regiao === "eua" && p.metro === name));
+  box.classList.toggle("show", region === "eua" && present.length > 1);
+  box.innerHTML = "";
+  if (region !== "eua") return;
+  [["todas","Todas as cidades"], ...present.map(name => [name, name])].forEach(([id, label]) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = label;
+    b.className = id === metro ? "on" : "";
+    b.setAttribute("aria-pressed", id === metro ? "true" : "false");
+    b.onclick = () => {
+      metro = id;
+      paintMetros();
+      render();
+      fitRegion();
+    };
+    box.appendChild(b);
+  });
+}
+function paintFilters(){
+  const box = document.getElementById("filters");
+  box.innerHTML = "";
+  CATS.forEach(c => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.dataset.cat = c;
+    b.textContent = c === "Todos" ? "Tudo" : c;
+    b.className = c === current ? "on" : "";
+    b.setAttribute("aria-pressed", c === current ? "true" : "false");
+    b.onclick = () => {
+      current = c;
+      [...box.children].forEach(x => { x.classList.remove("on"); x.setAttribute("aria-pressed","false"); });
+      b.classList.add("on");
+      b.setAttribute("aria-pressed","true");
+      render();
+    };
+    box.appendChild(b);
+  });
+}
+
+document.getElementById("q").addEventListener("input", e => { query = e.target.value; render(); });
+
+const pedido = document.getElementById("pedido");
+document.getElementById("cta").addEventListener("click", () => {
+  const digits = String(CONFIG.whatsapp || "").replace(/\D/g, "");
+  if (digits){
+    location.href = "https://wa.me/" + digits + "?text=" + encodeURIComponent(MSG);
+    return;
+  }
+  document.getElementById("pedido-msg").value = MSG;
+  pedido.showModal();
+});
+document.getElementById("fechar").onclick = () => pedido.close();
+document.getElementById("copiar").onclick = async () => {
+  const text = document.getElementById("pedido-msg").value;
+  const btn = document.getElementById("copiar");
+  try {
+    await navigator.clipboard.writeText(text);
+    btn.textContent = "Copiado";
+  } catch (err) {
+    const el = document.getElementById("pedido-msg");
+    el.focus();
+    el.select();
+    btn.textContent = "Seleciona e copia";
+  }
+  setTimeout(() => { btn.textContent = "Copiar mensagem"; }, 1600);
+};
+
+paintRegions();
+paintFilters();
+
+fetch("pins.json")
+  .then(r => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+  .then(data => {
+    PINS = data;
+    paintMetros();
+    render();
+    fitRegion();
+    setTimeout(() => map.invalidateSize(), 150);
+  })
+  .catch(() => {
+    document.getElementById("count").textContent = "Não deu para abrir a lista";
+    document.getElementById("list").innerHTML = '<div class="empty">O pins.json tem que estar nesta mesma pasta, servido junto com a página.</div>';
+  });
+</script>
+</body>
+</html>
