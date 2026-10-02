@@ -4,7 +4,8 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>Esquina — o mapa da coisa brasileira</title>
-<meta name="theme-color" content="#C4451A"/>
+<meta name="theme-color" content="#C4006A"/>
+<meta name="color-scheme" content="light"/>
 <meta name="description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro em Lisboa. E o primeiro mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
 <meta property="og:title" content="Esquina — o mapa da coisa brasileira"/>
 <meta property="og:description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro em Lisboa. E o primeiro mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
@@ -17,93 +18,386 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Staatliches&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 <style>
-:root{--cream:#F6E8D4;--paper:#FBF4EA;--ink:#1C140E;--muted:#5A4636;--terra:#C4451A;--terra-d:#9A2E10;--gold:#C9A227;--chip:#EFE0C8}
+:root{
+  --magenta:#C4006A;
+  --magenta-d:#9A0054;
+  --cyan:#3EC6E0;
+  --cyan-ink:#086E88;
+  --ink:#1A1218;
+  --sheet:#F4F7F8;
+  --paper:#FFFFFF;
+  --line:#D5DEE3;
+  --meta:#3A2C33;
+  --comer:#C4232A;
+  --mercado:#3D2358;
+  --beleza:#BE185D;
+  --saude:#1D4E89;
+  --servicos:#0E7490;
+  --role:#C2410C;
+}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);font-family:Outfit,system-ui,sans-serif}
-body{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
-header{background:var(--cream);border-bottom:1px solid #e4d2b4;padding:10px 14px 8px;z-index:800}
-.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.top img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--cream);border:1px solid #e4d2b4;flex:none}
-.brand{min-width:0}
-.top h1{font-family:Fraunces,Georgia,serif;font-size:22px;margin:0;line-height:1}
-.top small{display:block;color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
-.regions{margin-left:auto;display:flex;gap:6px}
-.regions button{border:0;background:var(--chip);color:var(--ink);padding:8px 12px;border-radius:999px;font:600 13px Outfit,sans-serif;cursor:pointer}
-.regions button.on{background:var(--terra);color:#fff}
-.search{margin:10px 0 8px}
-.search input{width:100%;border:1px solid #e0cba8;background:#fff;border-radius:12px;padding:10px 12px;font:500 16px Outfit,sans-serif;color:var(--ink)}
-.filters,.metros{display:flex;gap:7px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}
-.filters button,.metros button{border:0;background:var(--chip);color:var(--ink);padding:7px 12px;border-radius:999px;font:500 13px Outfit,sans-serif;white-space:nowrap;cursor:pointer}
-.filters button.on,.metros button.on{background:var(--ink);color:var(--paper)}
-.metros{display:none}
+html,body{margin:0;height:100%}
+html{background:var(--sheet)}
+body{
+  min-height:100%;
+  height:100vh;
+  height:100dvh;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  background:var(--sheet);
+  color:var(--ink);
+  font-family:"Familjen Grotesk",sans-serif;
+  font-size:1rem;
+  line-height:1.4;
+}
+::selection{background:#F6C3DC;color:var(--ink)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+input,textarea{caret-color:var(--magenta)}
+
+header{flex:none;z-index:800}
+.mast{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--magenta);
+  color:#fff;
+  padding:8px 12px;
+}
+.mast img{
+  width:40px;height:40px;flex:none;
+  border-radius:50%;
+  object-fit:cover;
+  background:#fff;
+}
+.mast h1{
+  margin:0;
+  font-family:Staatliches,sans-serif;
+  font-size:2.25rem;
+  font-weight:400;
+  line-height:.9;
+  letter-spacing:.01em;
+}
+.lede{
+  margin:2px 0 0;
+  color:#fff;
+  font-size:.95rem;
+  font-weight:500;
+  line-height:1.2;
+}
+.band{
+  background:var(--cyan);
+  padding:6px 8px;
+}
+.regions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.regions button{
+  min-height:44px;
+  border:2px solid var(--ink);
+  background:transparent;
+  color:var(--ink);
+  font-weight:700;
+  font-size:1rem;
+  letter-spacing:.01em;
+}
+.regions button.on{background:var(--ink);color:#fff}
+.regions button:hover{background:#fff}
+.regions button.on:hover{background:var(--ink);color:#fff}
+.find{background:var(--paper);padding:8px 10px 6px}
+.search input{
+  width:100%;
+  min-height:48px;
+  border:2px solid var(--ink);
+  border-radius:0;
+  background:#fff;
+  padding:10px 12px;
+  font-size:1rem;
+  font-weight:500;
+}
+.search input::placeholder{color:#5C4650;opacity:1}
+.metros,.filters{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:8px 0 2px;
+  scrollbar-width:thin;
+  scrollbar-color:var(--cyan-ink) transparent;
+}
+.metros{display:none;padding-top:8px}
 .metros.show{display:flex}
-.how{display:flex;gap:8px;padding:8px 14px;background:#fff8ee;border-bottom:1px solid #efe3d0;font-size:12px;color:var(--muted)}
-.how div{flex:1;min-width:0}
-.how b{display:block;color:var(--ink);font-size:12px}
-#map{flex:1;min-height:0}
-.sheet{background:var(--paper);border-top:1px solid #e4d2b4;height:32vh;height:32dvh;overflow:auto}
-.sheet-count{position:sticky;top:0;background:var(--cream);color:var(--muted);font-size:12px;padding:6px 14px;border-bottom:1px solid #efe3d0;z-index:2}
-.card{padding:11px 14px;border-bottom:1px solid #efe3d0;cursor:pointer;display:grid;grid-template-columns:10px 1fr;gap:10px}
-.card:hover{background:#fff8ee}
-.dot{width:10px;height:10px;border-radius:50%;margin-top:6px}
-.card h3{margin:0;font-size:15px;font-weight:600}
-.meta{color:var(--muted);font-size:12px;margin-top:2px}
-.feat{font-size:10px;color:var(--terra-d);font-weight:700;letter-spacing:.06em;margin-top:3px}
-.approx{font-size:11px;color:#8a5a32;margin-top:3px}
-footer{background:var(--ink);color:var(--cream);padding:12px 14px calc(12px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;gap:10px;align-items:center}
-footer p{margin:0;font-size:13px;line-height:1.3}
-footer strong{font-family:Fraunces,serif}
-.cta{background:var(--terra);color:#fff;border:0;cursor:pointer;padding:10px 14px;border-radius:999px;font:600 13px Outfit,sans-serif;white-space:nowrap}
-.leaflet-popup-content-wrapper{border-radius:14px;font-family:Outfit,sans-serif}
-.pop h3{margin:0 0 4px;font-size:16px}
-.pop p{margin:0 0 8px;color:#5a4636;font-size:13px}
-.pop a{color:var(--terra-d);font-weight:600;font-size:13px;margin-right:10px}
-.pin{width:16px;height:16px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25)}
-.pin.feat{width:20px;height:20px;box-shadow:0 0 0 2px var(--gold)}
-.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(196,69,26,.18)}
-.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background:#C4451A;color:#fff}
-.empty{padding:22px 16px;text-align:center;color:var(--muted);font-size:14px;line-height:1.45}
-dialog{border:0;border-radius:16px;padding:18px 16px 16px;background:var(--paper);color:var(--ink);max-width:440px;width:calc(100% - 28px);box-shadow:0 16px 50px rgba(28,20,14,.28)}
-dialog::backdrop{background:rgba(28,20,14,.45)}
-dialog h2{font-family:Fraunces,Georgia,serif;font-size:24px;margin:0 0 8px}
-dialog p{margin:0 0 10px;color:var(--muted);font-size:14px;line-height:1.4}
-dialog textarea{width:100%;min-height:92px;border:1px solid #e0cba8;border-radius:12px;padding:10px 12px;font:500 16px Outfit,sans-serif;background:#fff;color:var(--ink);resize:vertical}
-.dialog-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap}
-.ghost{border:0;background:var(--chip);color:var(--ink);padding:10px 14px;border-radius:999px;font:600 13px Outfit,sans-serif;cursor:pointer}
+.filters button,.metros button{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  flex:none;
+  min-height:44px;
+  padding:0 12px;
+  border:1px solid var(--ink);
+  background:#fff;
+  color:var(--ink);
+  font-weight:600;
+  font-size:.95rem;
+}
+.filters button.on,.metros button.on{color:#fff;border-color:transparent}
+.chip-ink{width:12px;height:12px;flex:none}
+.mast :focus-visible,footer :focus-visible,.cta:focus-visible{outline-color:#fff}
+
+#map{flex:1 1 auto;min-height:160px;background:#e7e0d4}
+.leaflet-container{font-family:"Familjen Grotesk",sans-serif;background:#d7e3ea}
+.leaflet-control-zoom a{
+  width:44px;height:44px;line-height:44px;
+  border-radius:0 !important;
+  color:var(--ink);
+  font-weight:700;
+  border:2px solid var(--ink);
+}
+.leaflet-bar{border:0 !important;box-shadow:0 6px 16px rgba(26,18,24,.16) !important}
+.leaflet-control-zoom a:hover{background:var(--magenta);color:#fff}
+.leaflet-control-attribution{
+  background:rgba(255,255,255,.92) !important;
+  color:var(--meta) !important;
+  font-family:"Familjen Grotesk",sans-serif !important;
+}
+.leaflet-popup-content-wrapper{
+  border-radius:0;
+  box-shadow:0 12px 28px rgba(26,18,24,.2);
+  padding:0;
+}
+.leaflet-popup-content{margin:12px 14px;min-width:180px}
+.leaflet-popup-tip{box-shadow:none}
+.pop h3{
+  margin:0 0 4px;
+  font-family:Staatliches,sans-serif;
+  font-weight:400;
+  font-size:1.6rem;
+  line-height:1;
+  letter-spacing:.01em;
+}
+.pop p{margin:0;color:var(--meta);font-size:.9rem;line-height:1.35}
+.pop .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pop a{
+  display:inline-block;
+  padding:8px 10px;
+  background:var(--ink);
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  font-size:.875rem;
+}
+.pop a.alt{background:#fff;color:var(--ink);border:2px solid var(--ink);padding:6px 8px}
+.swatch-pin{
+  width:14px;height:14px;margin:4px;
+  border:2px solid #fff;
+  box-shadow:0 1px 2px rgba(26,18,24,.35);
+}
+.swatch-pin.feat{
+  box-shadow:2px 0 0 var(--cyan-ink),-2px 0 0 var(--magenta),0 1px 2px rgba(26,18,24,.28);
+}
+.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(196,0,106,.22) !important}
+.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{
+  background:var(--magenta) !important;
+  color:#fff !important;
+  font-family:"Familjen Grotesk",sans-serif !important;
+  font-weight:700 !important;
+}
+
+.sheet{
+  flex:0 1 24dvh;
+  height:auto;
+  max-height:24dvh;
+  min-height:104px;
+  background:var(--sheet);
+  border-top:2px solid var(--ink);
+  overflow:auto;
+  scrollbar-width:thin;
+  scrollbar-color:var(--cyan-ink) var(--sheet);
+}
+.sheet-count{
+  position:sticky;top:0;z-index:2;
+  background:#E7F8FC;
+  color:var(--ink);
+  font-weight:700;
+  font-size:.85rem;
+  padding:7px 14px;
+  border-bottom:1px solid var(--line);
+}
+#list.turning{
+  animation:turn 240ms cubic-bezier(.16,.84,.32,1);
+  transform-origin:center top;
+}
+@keyframes turn{
+  0%{transform:perspective(900px) rotateX(0);filter:blur(0)}
+  40%{transform:perspective(900px) rotateX(8deg);filter:blur(1px)}
+  100%{transform:perspective(900px) rotateX(0);filter:blur(0)}
+}
+.flyer{
+  display:block;
+  width:100%;
+  text-align:left;
+  border:0;
+  border-bottom:1px solid var(--line);
+  background:var(--paper);
+  padding:11px 14px 12px;
+  color:var(--ink);
+}
+.flyer:hover{background:#F3FBFD}
+.flyer.back{background:#E6EEF1}
+.flyer.forward{
+  position:relative;
+  z-index:1;
+  background:#fff;
+  box-shadow:0 10px 22px rgba(26,18,24,.16);
+}
+.flyer-top{display:flex;gap:8px;align-items:flex-start}
+.ink{width:12px;height:12px;margin-top:5px;flex:none}
+.flyer-name{
+  font-family:Staatliches,sans-serif;
+  font-size:1.45rem;
+  font-weight:400;
+  line-height:1.02;
+  letter-spacing:.01em;
+}
+.flyer.destaque .flyer-name{
+  text-shadow:1px 0 0 var(--cyan-ink),-1px 0 0 var(--magenta);
+}
+.meta{margin-top:3px;color:var(--meta);font-size:.84rem;line-height:1.35}
+.approx{margin-top:3px;color:var(--cyan-ink);font-size:.8rem;font-weight:700}
+.stamp{margin-top:4px;color:var(--magenta);font-size:.78rem;font-weight:700}
+.empty{padding:22px 16px;color:var(--meta);font-size:.95rem;line-height:1.45}
+.skel{
+  height:68px;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,#fff 0%,#F7E1EE 45%,#fff 100%);
+  background-size:200% 100%;
+  animation:sheen 1.1s ease-out infinite;
+}
+@keyframes sheen{to{background-position:-200% 0}}
+
+footer{
+  flex:none;
+  background:var(--ink);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+}
+footer p{margin:0;color:#F3D5E4;font-size:.9rem;line-height:1.3}
+footer strong{color:#fff;font-weight:700}
+.cta{
+  background:var(--magenta);
+  color:#fff;
+  border:0;
+  min-height:44px;
+  padding:0 14px;
+  font-weight:700;
+  font-size:.95rem;
+  white-space:nowrap;
+}
+.cta:hover{background:var(--magenta-d)}
+.ghost{
+  background:#fff;
+  color:var(--ink);
+  border:2px solid var(--ink);
+  min-height:44px;
+  padding:0 14px;
+  font-weight:700;
+}
+.ghost:hover{background:#F6C3DC}
+
+dialog{
+  border:0;
+  padding:0;
+  max-width:440px;
+  width:calc(100% - 24px);
+  background:#fff;
+  color:var(--ink);
+  box-shadow:0 18px 48px rgba(26,18,24,.28);
+}
+dialog::backdrop{background:rgba(26,18,24,.5)}
+dialog h2{
+  margin:0;
+  padding:14px 16px 12px;
+  background:var(--magenta);
+  color:#fff;
+  font-family:Staatliches,sans-serif;
+  font-size:2.15rem;
+  font-weight:400;
+  letter-spacing:.01em;
+  line-height:1;
+}
+.dialog-body{padding:14px 16px 16px}
+dialog p{margin:0 0 10px;color:var(--meta);font-size:.95rem;line-height:1.4;max-width:62ch}
+dialog textarea{
+  width:100%;
+  min-height:96px;
+  border:2px solid var(--ink);
+  border-radius:0;
+  padding:10px 12px;
+  font-size:1rem;
+  background:#fff;
+  resize:vertical;
+}
+.dialog-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:12px}
+#pagar:empty{display:none}
+#pagar a{display:inline-flex;align-items:center;text-decoration:none}
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+@media (min-width:960px){
+  body{
+    display:grid;
+    grid-template-columns:minmax(320px,420px) minmax(0,1fr);
+    grid-template-rows:auto minmax(0,1fr) auto;
+  }
+  header{grid-column:1 / -1}
+  #map{grid-column:2;grid-row:2;min-height:0}
+  .sheet{grid-column:1;grid-row:2;height:auto;max-height:none;min-height:0;flex:none}
+  footer{grid-column:1 / -1}
+  .mast h1{font-size:2.75rem}
+}
+@media (prefers-reduced-motion:reduce){
+  #list.turning{animation:none}
+  .skel{animation:none;background:#F7E1EE}
+}
 </style>
 </head>
 <body>
 <header>
-  <div class="top">
+  <div class="mast">
     <img src="assets/mark.png" alt=""/>
-    <div class="brand">
+    <div>
       <h1>Esquina</h1>
-      <small id="place-label">Lisboa</small>
+      <p class="lede">O mapa da coisa brasileira.</p>
     </div>
+  </div>
+  <div class="band">
     <div class="regions" id="regions" role="group" aria-label="Mapa"></div>
   </div>
-  <div class="search">
-    <label class="sr" for="q">Buscar por nome, bairro ou cidade</label>
-    <input id="q" type="search" placeholder="Nome, bairro ou cidade — padaria, açaí, salão…" autocomplete="off" enterkeyhint="search"/>
+  <div class="find">
+    <div class="search">
+      <label class="sr" for="q">Buscar por nome, bairro ou cidade</label>
+      <input id="q" type="search" placeholder="Nome, bairro ou cidade" autocomplete="off" enterkeyhint="search"/>
+    </div>
+    <div class="metros" id="metros" role="group" aria-label="Cidades nos EUA"></div>
+    <div class="filters" id="filters" role="group" aria-label="Categorias"></div>
   </div>
-  <div class="metros" id="metros" role="group" aria-label="Cidades nos EUA"></div>
-  <div class="filters" id="filters" role="group" aria-label="Categorias"></div>
 </header>
-<div class="how">
-  <div><b>1. Abre o mapa</b>Lisboa primeiro. EUA também.</div>
-  <div><b>2. Entra de graça</b>Padaria, açaí, salão, mercearia.</div>
-  <div><b>3. Destaque 29€</b>Pin no topo do bairro.</div>
-</div>
 <div id="map"></div>
-<div class="sheet" id="sheet">
+<div class="sheet" id="sheet" aria-busy="true">
   <div class="sheet-count" id="count">Abrindo o mapa…</div>
-  <div id="list"></div>
+  <div id="list">
+    <div class="skel"></div>
+    <div class="skel"></div>
+    <div class="skel"></div>
+  </div>
 </div>
 <footer>
   <p><strong>Tem negócio?</strong><br/>Grátis no mapa. Destaque: 29€/mês.</p>
@@ -111,20 +405,23 @@ dialog textarea{width:100%;min-height:92px;border:1px solid #e0cba8;border-radiu
 </footer>
 <dialog id="pedido" aria-labelledby="pedido-titulo">
   <h2 id="pedido-titulo">Quero meu pin</h2>
-  <p>O contato público, por agora, é este site. Ainda não tem número de WhatsApp nem e-mail.</p>
-  <p>Copia a mensagem. Quando existir um contato, ela já está pronta. O destaque de 29€/mês fica só no texto: aqui não tem pagamento.</p>
-  <textarea id="pedido-msg">Oi! Vi o Esquina e quero o pin do meu negócio em Lisboa.</textarea>
-  <div class="dialog-actions">
-    <button class="ghost" id="fechar" type="button">Fechar</button>
-    <button class="cta" id="copiar" type="button">Copiar mensagem</button>
+  <div class="dialog-body">
+    <p>O contato público, por agora, é este site. Ainda não tem número de WhatsApp nem e-mail.</p>
+    <p>Copia a mensagem. Quando existir um contato, ela já está pronta. O destaque de 29€/mês fica só no texto: aqui não tem pagamento.</p>
+    <textarea id="pedido-msg">Oi! Vi o Esquina e quero o pin do meu negócio em Lisboa.</textarea>
+    <div class="dialog-actions">
+      <div id="pagar"></div>
+      <button class="ghost" id="fechar" type="button">Fechar</button>
+      <button class="cta" id="copiar" type="button">Copiar mensagem</button>
+    </div>
   </div>
 </dialog>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script>
-const CONFIG = { whatsapp: "" };
+const CONFIG = { whatsapp: "", pagamento: "" };
 const MSG = "Oi! Vi o Esquina e quero o pin do meu negócio em Lisboa.";
-const COLORS = {Comer:"#C4451A",Mercado:"#C9A227",Beleza:"#9B3D6E",Saúde:"#2A5A3A",Serviços:"#3D4E6B","Rolê":"#6B3FA0"};
+const COLORS = {Comer:"#C4232A",Mercado:"#3D2358",Beleza:"#BE185D",Saúde:"#1D4E89",Serviços:"#0E7490","Rolê":"#C2410C"};
 const CATS = ["Todos","Comer","Mercado","Beleza","Saúde","Serviços","Rolê"];
 const METRO_ORDER = ["Boston","Nova York","Miami","Orlando"];
 let PINS = [];
@@ -132,14 +429,16 @@ let region = "lisboa";
 let metro = "todas";
 let current = "Todos";
 let query = "";
+let openId = null;
 
 const map = L.map("map",{zoomControl:false}).setView([38.73,-9.15],12);
 L.control.zoom({position:"topright"}).addTo(map);
-L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",{
-  attribution:"&copy; OSM &copy; CARTO", maxZoom:19
+L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{
+  attribution:"Tiles &copy; Esri", maxZoom:19
 }).addTo(map);
 const cluster = L.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:42,spiderfyOnMaxZoom:true});
 map.addLayer(cluster);
+map.on("popupclose", () => lift(null));
 
 function esc(s){
   return String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
@@ -163,20 +462,21 @@ function placeLine(p){
   return bits.join(" · ");
 }
 function iconFor(p){
-  const c = COLORS[p.categoria] || "#C4451A";
+  const c = COLORS[p.categoria] || "#C4006A";
   return L.divIcon({
     className:"",
-    html:`<div class="pin${p.featured ? " feat" : ""}" style="background:${c}"></div>`,
-    iconSize:[22,22], iconAnchor:[11,20], popupAnchor:[0,-16]
+    html:`<div class="swatch-pin${p.featured ? " feat" : ""}" style="background:${c}"></div>`,
+    iconSize:[22,22], iconAnchor:[11,11], popupAnchor:[0,-14]
   });
 }
 function popup(p){
   const l = linkFor(p);
   const end = p.endereco ? `<br>${esc(p.endereco)}` : "";
-  const approx = isApprox(p) ? `<br><span class="approx">Localização aproximada</span>` : "";
-  return `<div class="pop"><h3>${esc(p.nome)}</h3><p>${esc(placeLine(p))}${end}${approx}<br>${esc(p.por || "")}</p>
-    <a href="${mapsUrl(p)}" target="_blank" rel="noopener">Como chegar</a>
-    ${l ? `<a href="${esc(l)}" target="_blank" rel="noopener">Abrir</a>` : ""}</div>`;
+  const approx = isApprox(p) ? `<br><span class="approx">Localização aproximada.</span>` : "";
+  const por = p.por ? `<br>${esc(p.por)}` : "";
+  return `<div class="pop"><h3>${esc(p.nome)}</h3><p>${esc(placeLine(p))}${end}${approx}${por}</p>
+    <div class="actions"><a href="${mapsUrl(p)}" target="_blank" rel="noopener">Como chegar</a>
+    ${l ? `<a class="alt" href="${esc(l)}" target="_blank" rel="noopener">Abrir</a>` : ""}</div></div>`;
 }
 function inRegion(p){
   if (p.regiao !== region) return false;
@@ -198,13 +498,34 @@ function filtered(){
     .sort((a,b) => (b.featured - a.featured) || a.nome.localeCompare(b.nome, "pt"));
 }
 function lugarLabel(n){
-  if (n === 0) return "Nenhum lugar";
-  if (n === 1) return "1 lugar";
-  return n + " lugares";
+  const where = region === "lisboa" ? "em Lisboa" : (metro !== "todas" ? "em " + metro : "nos EUA");
+  if (n === 0) return "Nenhum lugar " + where;
+  if (n === 1) return "1 lugar " + where;
+  return n + " lugares " + where;
 }
 function emptyCopy(){
   if (region === "eua") return "Nada neste lado do mapa. Tenta padaria, açaí, mercearia, Newark ou Orlando.";
   return "Nada por aqui. Tenta padaria, açaí, salão, dentista, mercearia ou outro bairro.";
+}
+function turnStack(){
+  const list = document.getElementById("list");
+  list.classList.remove("turning");
+  void list.offsetWidth;
+  list.classList.add("turning");
+}
+function lift(id){
+  openId = id;
+  document.querySelectorAll(".flyer").forEach(el => {
+    const on = id != null && el.dataset.id === String(id);
+    el.classList.toggle("forward", on);
+    el.classList.toggle("back", id != null && !on);
+  });
+}
+function settle(fit){
+  requestAnimationFrame(() => {
+    map.invalidateSize();
+    requestAnimationFrame(() => { if (fit) fitRegion(); });
+  });
 }
 let markers = {};
 function render(){
@@ -214,7 +535,10 @@ function render(){
   const items = filtered();
   document.getElementById("count").textContent = lugarLabel(items.length);
   const tudo = document.querySelector('#filters button[data-cat="Todos"]');
-  if (tudo) tudo.textContent = "Tudo · " + scoped().length;
+  if (tudo){
+    const n = scoped().length;
+    tudo.querySelector(".chip-label").textContent = "Tudo · " + n;
+  }
   list.innerHTML = "";
   if (!items.length){
     list.innerHTML = `<div class="empty">${emptyCopy()}</div>`;
@@ -223,21 +547,27 @@ function render(){
   items.forEach(p => {
     const m = L.marker([p.lat, p.lon], {icon: iconFor(p), zIndexOffset: p.featured ? 400 : 0});
     m.bindPopup(popup(p));
+    m.on("click", () => lift(p.id));
     cluster.addLayer(m);
     markers[p.id] = m;
-    const el = document.createElement("div");
-    el.className = "card";
-    el.innerHTML = `<span class="dot" style="background:${COLORS[p.categoria] || "#C4451A"}"></span>
-      <div><h3>${esc(p.nome)}</h3>
+    const el = document.createElement("button");
+    el.type = "button";
+    el.className = "flyer" + (p.featured ? " destaque" : "");
+    el.dataset.id = String(p.id);
+    const ink = COLORS[p.categoria] || "#C4006A";
+    el.innerHTML = `<div class="flyer-top"><span class="ink" style="background:${ink}"></span>
+      <span class="flyer-name">${esc(p.nome)}</span></div>
       <div class="meta">${esc(placeLine(p))}${p.endereco ? " · " + esc(p.endereco) : ""}</div>
-      ${isApprox(p) ? '<div class="approx">Localização aproximada</div>' : ""}
-      ${p.featured ? '<div class="feat">DESTAQUE</div>' : ""}</div>`;
+      ${isApprox(p) ? '<div class="approx">Localização aproximada.</div>' : ""}
+      ${p.featured ? '<div class="stamp">Destaque</div>' : ""}`;
     el.onclick = () => {
+      lift(p.id);
       const marker = markers[p.id];
       cluster.zoomToShowLayer(marker, () => marker.openPopup());
     };
     list.appendChild(el);
   });
+  if (openId != null) lift(openId);
 }
 function fitRegion(){
   const items = PINS.filter(inRegion);
@@ -264,11 +594,12 @@ function paintRegions(){
       if (region === id) return;
       region = id;
       metro = "todas";
-      document.getElementById("place-label").textContent = id === "lisboa" ? "Lisboa" : "EUA";
+      openId = null;
       paintRegions();
       paintMetros();
       render();
-      fitRegion();
+      turnStack();
+      settle(true);
     };
     box.appendChild(b);
   });
@@ -285,11 +616,13 @@ function paintMetros(){
     b.textContent = label;
     b.className = id === metro ? "on" : "";
     b.setAttribute("aria-pressed", id === metro ? "true" : "false");
+    if (id === metro) b.style.background = "#1A1218";
     b.onclick = () => {
       metro = id;
+      openId = null;
       paintMetros();
       render();
-      fitRegion();
+      settle(true);
     };
     box.appendChild(b);
   });
@@ -301,21 +634,38 @@ function paintFilters(){
     const b = document.createElement("button");
     b.type = "button";
     b.dataset.cat = c;
-    b.textContent = c === "Todos" ? "Tudo" : c;
-    b.className = c === current ? "on" : "";
-    b.setAttribute("aria-pressed", c === current ? "true" : "false");
+    const on = c === current;
+    b.className = on ? "on" : "";
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    const ink = c === "Todos" ? "#1A1218" : (COLORS[c] || "#C4006A");
+    if (on) b.style.background = ink;
+    const label = c === "Todos" ? "Tudo" : c;
+    b.innerHTML = `<span class="chip-ink" style="background:${on ? "#fff" : ink}"></span><span class="chip-label">${label}</span>`;
     b.onclick = () => {
       current = c;
-      [...box.children].forEach(x => { x.classList.remove("on"); x.setAttribute("aria-pressed","false"); });
-      b.classList.add("on");
-      b.setAttribute("aria-pressed","true");
+      openId = null;
+      paintFilters();
       render();
     };
     box.appendChild(b);
   });
 }
+function syncPay(){
+  const host = document.getElementById("pagar");
+  host.replaceChildren();
+  const url = String(CONFIG.pagamento || "").trim();
+  if (!url) return;
+  const a = document.createElement("a");
+  a.className = "cta";
+  a.href = url;
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.textContent = "Pagar destaque";
+  host.appendChild(a);
+}
 
-document.getElementById("q").addEventListener("input", e => { query = e.target.value; render(); });
+document.getElementById("q").addEventListener("input", e => { query = e.target.value; openId = null; render(); });
+window.addEventListener("resize", () => map.invalidateSize());
 
 const pedido = document.getElementById("pedido");
 document.getElementById("cta").addEventListener("click", () => {
@@ -325,6 +675,7 @@ document.getElementById("cta").addEventListener("click", () => {
     return;
   }
   document.getElementById("pedido-msg").value = MSG;
+  syncPay();
   pedido.showModal();
 });
 document.getElementById("fechar").onclick = () => pedido.close();
@@ -345,19 +696,21 @@ document.getElementById("copiar").onclick = async () => {
 
 paintRegions();
 paintFilters();
+syncPay();
 
 fetch("pins.json")
   .then(r => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
   .then(data => {
     PINS = data;
+    document.getElementById("sheet").setAttribute("aria-busy", "false");
     paintMetros();
     render();
-    fitRegion();
-    setTimeout(() => map.invalidateSize(), 150);
+    settle(true);
   })
   .catch(() => {
+    document.getElementById("sheet").setAttribute("aria-busy", "false");
     document.getElementById("count").textContent = "Não deu para abrir a lista";
-    document.getElementById("list").innerHTML = '<div class="empty">O pins.json tem que estar nesta mesma pasta, servido junto com a página.</div>';
+    document.getElementById("list").innerHTML = '<div class="empty">O pins.json tem que estar nesta mesma pasta, servido junto com a página. Atualiza e tenta de novo.</div>';
   });
 </script>
 </body>
