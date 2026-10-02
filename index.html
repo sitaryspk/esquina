@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>Esquina — o mapa da coisa brasileira</title>
-<meta name="theme-color" content="#C4006A"/>
+<meta name="theme-color" content="#0F7A43"/>
 <meta name="color-scheme" content="light"/>
 <meta name="description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro em Lisboa. E o primeiro mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
 <meta property="og:title" content="Esquina — o mapa da coisa brasileira"/>
@@ -18,14 +18,14 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Staatliches&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 <style>
 :root{
-  --magenta:#C4006A;
-  --magenta-d:#9A0054;
+  --magenta:#0F7A43;
+  --magenta-d:#0B5C34;
   --cyan:#3EC6E0;
   --cyan-ink:#086E88;
   --ink:#1A1218;
@@ -52,11 +52,11 @@ body{
   overflow:hidden;
   background:var(--sheet);
   color:var(--ink);
-  font-family:"Familjen Grotesk",sans-serif;
+  font-family:Nunito,sans-serif;
   font-size:1rem;
   line-height:1.4;
 }
-::selection{background:#F6C3DC;color:var(--ink)}
+::selection{background:#C8E6D4;color:var(--ink)}
 :focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 button,input,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
@@ -80,11 +80,11 @@ header{flex:none;z-index:800}
 }
 .mast h1{
   margin:0;
-  font-family:Staatliches,sans-serif;
-  font-size:2.25rem;
-  font-weight:400;
-  line-height:.9;
-  letter-spacing:.01em;
+  font-family:Nunito,sans-serif;
+  font-size:1.7rem;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-.02em;
 }
 .lede{
   margin:2px 0 0;
@@ -150,7 +150,7 @@ header{flex:none;z-index:800}
 .mast :focus-visible,footer :focus-visible,.cta:focus-visible{outline-color:#fff}
 
 #map{flex:1 1 auto;min-height:160px;background:#e7e0d4}
-.leaflet-container{font-family:"Familjen Grotesk",sans-serif;background:#d7e3ea}
+.leaflet-container{font-family:Nunito,sans-serif;background:#d7e3ea}
 .leaflet-control-zoom a{
   width:44px;height:44px;line-height:44px;
   border-radius:0 !important;
@@ -163,7 +163,7 @@ header{flex:none;z-index:800}
 .leaflet-control-attribution{
   background:rgba(255,255,255,.92) !important;
   color:var(--meta) !important;
-  font-family:"Familjen Grotesk",sans-serif !important;
+  font-family:Nunito,sans-serif !important;
 }
 .leaflet-popup-content-wrapper{
   border-radius:0;
@@ -174,11 +174,11 @@ header{flex:none;z-index:800}
 .leaflet-popup-tip{box-shadow:none}
 .pop h3{
   margin:0 0 4px;
-  font-family:Staatliches,sans-serif;
-  font-weight:400;
-  font-size:1.6rem;
-  line-height:1;
-  letter-spacing:.01em;
+  font-family:Nunito,sans-serif;
+  font-weight:800;
+  font-size:1.25rem;
+  line-height:1.1;
+  letter-spacing:-.02em;
 }
 .pop p{margin:0;color:var(--meta);font-size:.9rem;line-height:1.35}
 .pop .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -200,11 +200,11 @@ header{flex:none;z-index:800}
 .swatch-pin.feat{
   box-shadow:2px 0 0 var(--cyan-ink),-2px 0 0 var(--magenta),0 1px 2px rgba(26,18,24,.28);
 }
-.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(196,0,106,.22) !important}
+.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(15,122,67,.22) !important}
 .marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{
   background:var(--magenta) !important;
   color:#fff !important;
-  font-family:"Familjen Grotesk",sans-serif !important;
+  font-family:Nunito,sans-serif !important;
   font-weight:700 !important;
 }
 
@@ -258,11 +258,11 @@ header{flex:none;z-index:800}
 .flyer-top{display:flex;gap:8px;align-items:flex-start}
 .ink{width:12px;height:12px;margin-top:5px;flex:none}
 .flyer-name{
-  font-family:Staatliches,sans-serif;
-  font-size:1.45rem;
-  font-weight:400;
-  line-height:1.02;
-  letter-spacing:.01em;
+  font-family:Nunito,sans-serif;
+  font-size:1.15rem;
+  font-weight:800;
+  line-height:1.15;
+  letter-spacing:-.02em;
 }
 .flyer.destaque .flyer-name{
   text-shadow:1px 0 0 var(--cyan-ink),-1px 0 0 var(--magenta);
@@ -328,10 +328,10 @@ dialog h2{
   padding:14px 16px 12px;
   background:var(--magenta);
   color:#fff;
-  font-family:Staatliches,sans-serif;
-  font-size:2.15rem;
-  font-weight:400;
-  letter-spacing:.01em;
+  font-family:Nunito,sans-serif;
+  font-size:1.45rem;
+  font-weight:800;
+  letter-spacing:-.02em;
   line-height:1;
 }
 .dialog-body{padding:14px 16px 16px}
@@ -462,7 +462,7 @@ function placeLine(p){
   return bits.join(" · ");
 }
 function iconFor(p){
-  const c = COLORS[p.categoria] || "#C4006A";
+  const c = COLORS[p.categoria] || "#0F7A43";
   return L.divIcon({
     className:"",
     html:`<div class="swatch-pin${p.featured ? " feat" : ""}" style="background:${c}"></div>`,
@@ -554,7 +554,7 @@ function render(){
     el.type = "button";
     el.className = "flyer" + (p.featured ? " destaque" : "");
     el.dataset.id = String(p.id);
-    const ink = COLORS[p.categoria] || "#C4006A";
+    const ink = COLORS[p.categoria] || "#0F7A43";
     el.innerHTML = `<div class="flyer-top"><span class="ink" style="background:${ink}"></span>
       <span class="flyer-name">${esc(p.nome)}</span></div>
       <div class="meta">${esc(placeLine(p))}${p.endereco ? " · " + esc(p.endereco) : ""}</div>
@@ -637,7 +637,7 @@ function paintFilters(){
     const on = c === current;
     b.className = on ? "on" : "";
     b.setAttribute("aria-pressed", on ? "true" : "false");
-    const ink = c === "Todos" ? "#1A1218" : (COLORS[c] || "#C4006A");
+    const ink = c === "Todos" ? "#1A1218" : (COLORS[c] || "#0F7A43");
     if (on) b.style.background = ink;
     const label = c === "Todos" ? "Tudo" : c;
     b.innerHTML = `<span class="chip-ink" style="background:${on ? "#fff" : ink}"></span><span class="chip-label">${label}</span>`;
