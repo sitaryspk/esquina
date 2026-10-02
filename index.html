@@ -224,6 +224,14 @@ header{flex:none;z-index:800}
   scrollbar-width:thin;
   scrollbar-color:var(--cyan-ink) var(--sheet);
 }
+
+.dicas{display:flex;gap:8px;overflow-x:auto;padding:8px 0 0;scrollbar-width:thin}
+.dicas button{flex:none;min-height:44px;padding:0 12px;border:2px solid var(--ink);border-radius:999px;background:#fff;font-weight:800}
+.dicas button.on{background:var(--magenta);color:#fff;border-color:transparent}
+.dica-tip{margin:6px 0 0;font-size:.9rem;font-weight:700;line-height:1.35}
+.sheet-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#E7F8FC;border-bottom:1px solid var(--line);padding:6px 10px 6px 14px}
+.sheet-bar .sheet-count{position:static;padding:0;border:0;background:transparent}
+#meleva{flex:none;min-height:36px;padding:0 12px;border:2px solid var(--ink);border-radius:999px;background:#fff;font-weight:800}
 .sheet-count{
   position:sticky;top:0;z-index:2;
   background:#E7F8FC;
@@ -393,11 +401,13 @@ dialog textarea{
     </div>
     <div class="metros" id="metros" role="group" aria-label="Países na Europa"></div>
     <div class="filters" id="filters" role="group" aria-label="Categorias"></div>
+    <div class="dicas" id="dicas" role="group" aria-label="Dicas"></div>
+    <p class="dica-tip" id="dica-tip" hidden></p>
   </div>
 </header>
 <div id="map"></div>
 <div class="sheet" id="sheet" aria-busy="true">
-  <div class="sheet-count" id="count">Abrindo o mapa…</div>
+  <div class="sheet-bar"><div class="sheet-count" id="count">Abrindo o mapa…</div><button id="meleva" type="button">Me leva 🎲</button></div>
   <div id="list">
     <div class="skel"></div>
     <div class="skel"></div>
@@ -405,14 +415,14 @@ dialog textarea{
   </div>
 </div>
 <footer>
-  <p><strong>Tem negócio?</strong><br/>Grátis no mapa. Destaque: 29€/mês.</p>
+  <p><strong>Tem negócio?</strong><br/>Grátis no mapa. Destaque 29€/mês: primeiro nas Dicas, com selo exclusivo.</p>
   <button class="cta" id="cta" type="button">Quero meu pin</button>
 </footer>
 <dialog id="pedido" aria-labelledby="pedido-titulo">
   <h2 id="pedido-titulo">Quero meu pin</h2>
   <div class="dialog-body">
     <p>O contato público, por agora, é este site. Ainda não tem número de WhatsApp nem e-mail.</p>
-    <p>Copia a mensagem. Quando existir um contato, ela já está pronta. O destaque de 29€/mês fica só no texto: aqui não tem pagamento.</p>
+    <p>Copia a mensagem. Quando existir um contato, ela já está pronta. O destaque de 29€/mês ainda não cobra aqui. Quando o pagamento existir, quem paga entra primeiro nas Dicas, ganha o selo exclusivo e o botão Me leva prefere esse lugar.</p>
     <textarea id="pedido-msg">Oi! Vi o Esquina e quero o pin do meu negócio na Europa.</textarea>
     <div class="dialog-actions">
       <div id="pagar"></div>
@@ -428,6 +438,13 @@ const CONFIG = { whatsapp: "", pagamento: "" };
 const COLORS = {Comer:"#C4232A",Mercado:"#3D2358",Beleza:"#BE185D",Saúde:"#1D4E89",Serviços:"#0E7490","Rolê":"#C2410C"};
 const CATS = ["Todos","Comer","Mercado","Beleza","Saúde","Serviços","Rolê"];
 const GLYPH = {Todos:"✨",Comer:"🥘",Mercado:"🛒",Beleza:"💅",Saúde:"🦷",Serviços:"✂️","Rolê":"🎶"};
+const DICAS = [
+  {id:"encontrar",label:"Encontrar gente",glyph:"🤝",cats:["Comer","Rolê","Mercado"],tip:"Padaria, mercado e rolê são onde a conversa começa. Quem paga o destaque aparece primeiro."},
+  {id:"comida",label:"Comida típica",glyph:"🥘",cats:["Comer"],tip:"Churrasco, açaí, pão de queijo e o que já está no mapa. Sem lugar inventado."},
+  {id:"cheguei",label:"Cheguei agora",glyph:"🧳",cats:["Comer","Mercado"],tip:"Primeira fome e a mercearia. Os exclusivos sobem na lista."},
+  {id:"mora",label:"Morar aqui",glyph:"🏠",cats:["Serviços","Saúde","Beleza","Mercado"],tip:"Salão, dentista, mercado e quem resolve o dia a dia."}
+];
+let dica = "";
 const METRO_ORDER = ["Boston","Nova York","Miami","Orlando"];
 const COUNTRY_ORDER = ["Portugal","Reino Unido","Espanha","França","Irlanda","Alemanha","Itália"];
 const WHERE = {
@@ -517,8 +534,9 @@ function scoped(){
   return PINS.filter(p => inRegion(p) && matchesQuery(p));
 }
 function filtered(){
+  const guide = DICAS.find(d => d.id === dica);
   return scoped()
-    .filter(p => current === "Todos" || p.categoria === current)
+    .filter(p => guide ? guide.cats.includes(p.categoria) : (current === "Todos" || p.categoria === current))
     .sort((a,b) => (b.featured - a.featured) || a.nome.localeCompare(b.nome, "pt"));
 }
 function wherePhrase(){
@@ -592,7 +610,7 @@ function render(){
       <span class="flyer-name">${esc(p.nome)}</span></div>
       <div class="meta">${esc(placeLine(p))}${p.endereco ? " · " + esc(p.endereco) : ""}</div>
       ${isApprox(p) ? '<div class="approx">Localização aproximada.</div>' : ""}
-      ${p.featured ? '<div class="stamp">⭐ Destaque</div>' : ""}`;
+      ${p.featured ? '<div class="stamp">⭐ Exclusivo</div>' : ""}`;
     el.onclick = () => {
       lift(p.id);
       const marker = markers[p.id];
@@ -668,6 +686,44 @@ function paintMetros(){
     box.appendChild(b);
   });
 }
+
+function paintDicas(){
+  const box = document.getElementById("dicas");
+  const tip = document.getElementById("dica-tip");
+  box.innerHTML = "";
+  DICAS.forEach(d => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = d.id === dica ? "on" : "";
+    b.setAttribute("aria-pressed", d.id === dica ? "true" : "false");
+    b.textContent = d.glyph + " " + d.label;
+    b.onclick = () => {
+      dica = dica === d.id ? "" : d.id;
+      if (dica) current = "Todos";
+      openId = null;
+      paintDicas();
+      paintFilters();
+      render();
+      turnStack();
+    };
+    box.appendChild(b);
+  });
+  const on = DICAS.find(d => d.id === dica);
+  tip.hidden = !on;
+  tip.textContent = on ? on.tip : "";
+}
+function meLeva(){
+  const items = filtered();
+  const pool = items.filter(p => p.featured);
+  const pickFrom = pool.length ? pool : items;
+  if (!pickFrom.length) return;
+  const p = pickFrom[Math.floor(Math.random() * pickFrom.length)];
+  lift(p.id);
+  const marker = markers[p.id];
+  if (marker) cluster.zoomToShowLayer(marker, () => marker.openPopup());
+  const row = document.querySelector('.flyer[data-id="' + p.id + '"]');
+  if (row) row.scrollIntoView({block:"nearest"});
+}
 function paintFilters(){
   const box = document.getElementById("filters");
   box.innerHTML = "";
@@ -684,7 +740,9 @@ function paintFilters(){
     b.innerHTML = `<span class="chip-ink">${GLYPH[c] || ""}</span><span class="chip-label">${label}</span>`;
     b.onclick = () => {
       current = c;
+      dica = "";
       openId = null;
+      paintDicas();
       paintFilters();
       render();
     };
@@ -705,6 +763,7 @@ function syncPay(){
   host.appendChild(a);
 }
 
+document.getElementById("meleva").addEventListener("click", meLeva);
 document.getElementById("q").addEventListener("input", e => { query = e.target.value; openId = null; render(); });
 window.addEventListener("resize", () => map.invalidateSize());
 
@@ -738,6 +797,7 @@ document.getElementById("copiar").onclick = async () => {
 
 paintRegions();
 paintFilters();
+paintDicas();
 syncPay();
 
 fetch("pins.json")
