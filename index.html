@@ -101,6 +101,7 @@ header{flex:none;z-index:800}
 .regions button{
   min-height:44px;
   border:2px solid var(--ink);
+  border-radius:14px;
   background:transparent;
   color:var(--ink);
   font-weight:700;
@@ -115,7 +116,7 @@ header{flex:none;z-index:800}
   width:100%;
   min-height:48px;
   border:2px solid var(--ink);
-  border-radius:0;
+  border-radius:14px;
   background:#fff;
   padding:10px 12px;
   font-size:1rem;
@@ -140,13 +141,14 @@ header{flex:none;z-index:800}
   min-height:44px;
   padding:0 12px;
   border:1px solid var(--ink);
+  border-radius:999px;
   background:#fff;
   color:var(--ink);
   font-weight:600;
   font-size:.95rem;
 }
 .filters button.on,.metros button.on{color:#fff;border-color:transparent}
-.chip-ink{width:12px;height:12px;flex:none}
+.chip-ink{font-size:1.05rem;line-height:1;flex:none}
 .mast :focus-visible,footer :focus-visible,.cta:focus-visible{outline-color:#fff}
 
 #map{flex:1 1 auto;min-height:160px;background:#e7e0d4}
@@ -193,9 +195,12 @@ header{flex:none;z-index:800}
 }
 .pop a.alt{background:#fff;color:var(--ink);border:2px solid var(--ink);padding:6px 8px}
 .swatch-pin{
-  width:14px;height:14px;margin:4px;
+  width:30px;height:30px;margin:0;
+  border-radius:50%;
   border:2px solid #fff;
-  box-shadow:0 1px 2px rgba(26,18,24,.35);
+  box-shadow:0 2px 4px rgba(26,18,24,.35);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;line-height:1;
 }
 .swatch-pin.feat{
   box-shadow:2px 0 0 var(--cyan-ink),-2px 0 0 var(--magenta),0 1px 2px rgba(26,18,24,.28);
@@ -256,7 +261,7 @@ header{flex:none;z-index:800}
   box-shadow:0 10px 22px rgba(26,18,24,.16);
 }
 .flyer-top{display:flex;gap:8px;align-items:flex-start}
-.ink{width:12px;height:12px;margin-top:5px;flex:none}
+.ink{font-size:1.15rem;line-height:1;margin-top:2px;flex:none}
 .flyer-name{
   font-family:Nunito,sans-serif;
   font-size:1.15rem;
@@ -375,7 +380,7 @@ dialog textarea{
     <img src="assets/mark.png" alt=""/>
     <div>
       <h1>Esquina</h1>
-      <p class="lede">O mapa da coisa brasileira.</p>
+      <p class="lede">🧀 Padaria, 🥤 açaí, 💅 salão e 🎶 rolê.</p>
     </div>
   </div>
   <div class="band">
@@ -422,6 +427,7 @@ dialog textarea{
 const CONFIG = { whatsapp: "", pagamento: "" };
 const COLORS = {Comer:"#C4232A",Mercado:"#3D2358",Beleza:"#BE185D",Saúde:"#1D4E89",Serviços:"#0E7490","Rolê":"#C2410C"};
 const CATS = ["Todos","Comer","Mercado","Beleza","Saúde","Serviços","Rolê"];
+const GLYPH = {Todos:"✨",Comer:"🥘",Mercado:"🛒",Beleza:"💅",Saúde:"🦷",Serviços:"✂️","Rolê":"🎶"};
 const METRO_ORDER = ["Boston","Nova York","Miami","Orlando"];
 const COUNTRY_ORDER = ["Portugal","Reino Unido","Espanha","França","Irlanda","Alemanha","Itália"];
 const WHERE = {
@@ -483,8 +489,8 @@ function iconFor(p){
   const c = COLORS[p.categoria] || "#0F7A43";
   return L.divIcon({
     className:"",
-    html:`<div class="swatch-pin${p.featured ? " feat" : ""}" style="background:${c}"></div>`,
-    iconSize:[22,22], iconAnchor:[11,11], popupAnchor:[0,-14]
+    html:`<div class="swatch-pin${p.featured ? " feat" : ""}" style="background:${c}">${GLYPH[p.categoria] || "📍"}</div>`,
+    iconSize:[32,32], iconAnchor:[16,16], popupAnchor:[0,-16]
   });
 }
 function popup(p){
@@ -492,7 +498,7 @@ function popup(p){
   const end = p.endereco ? `<br>${esc(p.endereco)}` : "";
   const approx = isApprox(p) ? `<br><span class="approx">Localização aproximada.</span>` : "";
   const por = p.por ? `<br>${esc(p.por)}` : "";
-  return `<div class="pop"><h3>${esc(p.nome)}</h3><p>${esc(placeLine(p))}${end}${approx}${por}</p>
+  return `<div class="pop"><h3>${GLYPH[p.categoria] || ""} ${esc(p.nome)}</h3><p>${esc(placeLine(p))}${end}${approx}${por}</p>
     <div class="actions"><a href="${mapsUrl(p)}" target="_blank" rel="noopener">Como chegar</a>
     ${l ? `<a class="alt" href="${esc(l)}" target="_blank" rel="noopener">Abrir</a>` : ""}</div></div>`;
 }
@@ -582,11 +588,11 @@ function render(){
     el.className = "flyer" + (p.featured ? " destaque" : "");
     el.dataset.id = String(p.id);
     const ink = COLORS[p.categoria] || "#0F7A43";
-    el.innerHTML = `<div class="flyer-top"><span class="ink" style="background:${ink}"></span>
+    el.innerHTML = `<div class="flyer-top"><span class="ink">${GLYPH[p.categoria] || "📍"}</span>
       <span class="flyer-name">${esc(p.nome)}</span></div>
       <div class="meta">${esc(placeLine(p))}${p.endereco ? " · " + esc(p.endereco) : ""}</div>
       ${isApprox(p) ? '<div class="approx">Localização aproximada.</div>' : ""}
-      ${p.featured ? '<div class="stamp">Destaque</div>' : ""}`;
+      ${p.featured ? '<div class="stamp">⭐ Destaque</div>' : ""}`;
     el.onclick = () => {
       lift(p.id);
       const marker = markers[p.id];
@@ -675,7 +681,7 @@ function paintFilters(){
     const ink = c === "Todos" ? "#1A1218" : (COLORS[c] || "#0F7A43");
     if (on) b.style.background = ink;
     const label = c === "Todos" ? "Tudo" : c;
-    b.innerHTML = `<span class="chip-ink" style="background:${on ? "#fff" : ink}"></span><span class="chip-label">${label}</span>`;
+    b.innerHTML = `<span class="chip-ink">${GLYPH[c] || ""}</span><span class="chip-label">${label}</span>`;
     b.onclick = () => {
       current = c;
       openId = null;
