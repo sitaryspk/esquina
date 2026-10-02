@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Feijoada na panela de barro</title>
+  <desc id="desc">Panela de barro redonda com feijoada: feijão, linguiça, laranja e couve.</desc>
+  <path id="body" fill="#C4622F" d="M36 132c4 50 28 92 92 104 64-12 88-54 92-104-28 24-156 24-184 0z"/>
+  <ellipse id="rim" cx="128" cy="116" rx="108" ry="82" fill="#E08A52"/>
+  <path id="rim-shine" fill="#F6C9A6" d="M62 86c20-28 52-40 84-38-6 18-30 30-56 36-12 2-22 2-28 2z"/>
+  <ellipse id="rim-edge" cx="128" cy="122" rx="108" ry="82" fill="none" stroke="#8A3E22" stroke-width="8"/>
+  <ellipse id="broth" cx="128" cy="110" rx="84" ry="62" fill="#3A2418"/>
+  <g clip-path="url(#bowl)">
+    <g id="beans" fill="#1A100C">
+      <ellipse cx="78" cy="136" rx="22" ry="15" transform="rotate(-18 78 136)"/>
+      <ellipse cx="116" cy="150" rx="22" ry="15" transform="rotate(12 116 150)"/>
+      <ellipse cx="154" cy="142" rx="20" ry="14" transform="rotate(-8 154 142)"/>
+    </g>
+    <g id="bean-shine" fill="#6E4A36">
+      <ellipse cx="72" cy="130" rx="10" ry="6" transform="rotate(-18 72 130)"/>
+      <ellipse cx="108" cy="144" rx="10" ry="6" transform="rotate(12 108 144)"/>
+      <ellipse cx="148" cy="136" rx="9" ry="5" transform="rotate(-8 148 136)"/>
+    </g>
+    <g id="sausage-b">
+      <circle cx="176" cy="132" r="26" fill="#F4DCC4"/>
+      <circle cx="176" cy="132" r="18" fill="#C4472A"/>
+    </g>
+    <g id="orange">
+      <circle cx="116" cy="86" r="28" fill="#F5A524"/>
+      <path d="M116 60v52M90 86h52" stroke="#D9680C" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="116" cy="86" r="6" fill="#D9680C"/>
+    </g>
+    <g id="sausage-a">
+      <circle cx="164" cy="100" r="22" fill="#F8E6D2"/>
+      <circle cx="164" cy="100" r="15" fill="#A33A24"/>
+    </g>
+  </g>
+  <g id="couve">
+    <path fill="#187A38" d="M46 112c8-36 44-48 64-20-22 2-40 18-46 38-8-4-14-10-18-18z"/>
+    <path fill="#2E9A4A" d="M58 92c18-32 52-30 62-4-24 0-40 14-46 34-8-8-12-18-16-30z"/>
+  </g>
+  <clipPath id="bowl">
+    <ellipse cx="128" cy="110" rx="84" ry="62"/>
+  </clipPath>
+</svg>
