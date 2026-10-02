@@ -14,8 +14,8 @@
     "lon": -9.175569,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 2,
@@ -32,8 +32,8 @@
     "lon": -9.1346455,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 3,
@@ -50,8 +50,8 @@
     "lon": -9.179808,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 4,
@@ -68,8 +68,8 @@
     "lon": -9.143427,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 5,
@@ -86,8 +86,8 @@
     "lon": -9.147181,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 6,
@@ -104,8 +104,8 @@
     "lon": -9.128342,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 7,
@@ -122,8 +122,8 @@
     "lon": -9.145408,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 8,
@@ -140,8 +140,8 @@
     "lon": -9.145504,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 9,
@@ -158,8 +158,8 @@
     "lon": -9.144711,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 10,
@@ -176,8 +176,8 @@
     "lon": -9.147466,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 11,
@@ -194,8 +194,8 @@
     "lon": -9.158194,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 12,
@@ -212,8 +212,8 @@
     "lon": -9.192518,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 13,
@@ -230,8 +230,8 @@
     "lon": -9.186494,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 14,
@@ -248,8 +248,8 @@
     "lon": -9.142141,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 15,
@@ -266,8 +266,8 @@
     "lon": -9.130381,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 16,
@@ -284,8 +284,8 @@
     "lon": -9.162616,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 17,
@@ -302,8 +302,8 @@
     "lon": -9.1482,
     "geo_src": "centroid",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 18,
@@ -320,8 +320,8 @@
     "lon": -9.168759,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 19,
@@ -338,8 +338,8 @@
     "lon": -9.138907,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 20,
@@ -356,8 +356,8 @@
     "lon": -9.13122,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 21,
@@ -374,8 +374,8 @@
     "lon": -9.173156,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 22,
@@ -392,8 +392,8 @@
     "lon": -9.123805,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 23,
@@ -410,8 +410,8 @@
     "lon": -9.164652,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 24,
@@ -428,8 +428,8 @@
     "lon": -9.143236,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 25,
@@ -446,8 +446,8 @@
     "lon": -9.148177,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 26,
@@ -464,8 +464,8 @@
     "lon": -9.155813,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 27,
@@ -482,8 +482,8 @@
     "lon": -9.2192961,
     "geo_src": "nominatim",
     "cidade": "Amadora",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 28,
@@ -500,8 +500,8 @@
     "lon": -9.234923,
     "geo_src": "nominatim",
     "cidade": "Oeiras",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 29,
@@ -518,8 +518,8 @@
     "lon": -9.16233,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 30,
@@ -536,8 +536,8 @@
     "lon": -9.192832,
     "geo_src": "nominatim",
     "cidade": "Odivelas",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 31,
@@ -554,8 +554,8 @@
     "lon": -9.1786619,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 32,
@@ -572,8 +572,8 @@
     "lon": -9.174967,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 33,
@@ -590,8 +590,8 @@
     "lon": -9.127128,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 34,
@@ -608,8 +608,8 @@
     "lon": -9.132738,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 35,
@@ -626,8 +626,8 @@
     "lon": -9.129961,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 36,
@@ -644,8 +644,8 @@
     "lon": -9.1667796,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 37,
@@ -662,8 +662,8 @@
     "lon": -9.2415,
     "geo_src": "centroid",
     "cidade": "Oeiras",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 38,
@@ -680,8 +680,8 @@
     "lon": -9.149461,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 39,
@@ -698,8 +698,8 @@
     "lon": -9.149848,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 40,
@@ -716,8 +716,8 @@
     "lon": -9.133622,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 41,
@@ -734,8 +734,8 @@
     "lon": -9.12935,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 42,
@@ -752,8 +752,8 @@
     "lon": -9.174904,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 43,
@@ -770,8 +770,8 @@
     "lon": -9.1968,
     "geo_src": "centroid",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 44,
@@ -788,8 +788,8 @@
     "lon": -9.1460442,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 45,
@@ -806,8 +806,8 @@
     "lon": -9.144237,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 46,
@@ -824,8 +824,8 @@
     "lon": -9.0645,
     "geo_src": "centroid",
     "cidade": "Póvoa de Santa Iria",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 47,
@@ -842,8 +842,8 @@
     "lon": -9.1651185,
     "geo_src": "nominatim",
     "cidade": "Odivelas",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 48,
@@ -860,8 +860,8 @@
     "lon": -9.129319,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 49,
@@ -878,8 +878,8 @@
     "lon": -9.1972513,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 50,
@@ -896,8 +896,8 @@
     "lon": -9.1393,
     "geo_src": "centroid",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 51,
@@ -914,8 +914,8 @@
     "lon": -9.145767,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 52,
@@ -932,8 +932,8 @@
     "lon": -9.148368,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 53,
@@ -950,8 +950,8 @@
     "lon": -9.1917815,
     "geo_src": "approx",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 54,
@@ -968,8 +968,8 @@
     "lon": -9.185493,
     "geo_src": "nominatim",
     "cidade": "Odivelas",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 55,
@@ -986,8 +986,8 @@
     "lon": -9.166697,
     "geo_src": "nominatim",
     "cidade": "Almada",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 56,
@@ -1004,8 +1004,8 @@
     "lon": -9.218113,
     "geo_src": "nominatim",
     "cidade": "Amadora",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 57,
@@ -1022,8 +1022,8 @@
     "lon": -9.243847,
     "geo_src": "nominatim",
     "cidade": "Amadora",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 58,
@@ -1040,8 +1040,8 @@
     "lon": -9.142755,
     "geo_src": "nominatim",
     "cidade": "Lisboa",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 59,
@@ -1058,8 +1058,8 @@
     "lon": -9.2982948,
     "geo_src": "approx",
     "cidade": "Oeiras",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 60,
@@ -1076,8 +1076,8 @@
     "lon": -9.1896665,
     "geo_src": "nominatim",
     "cidade": "Odivelas",
-    "regiao": "lisboa",
-    "metro": ""
+    "regiao": "europa",
+    "metro": "Portugal"
   },
   {
     "id": 101,
@@ -1402,5 +1402,366 @@
     "lat": 28.4622512,
     "lon": -81.456688,
     "geo_src": "nominatim"
+  },
+  {
+    "id": "o-benedito-porto",
+    "nome": "O Benedito",
+    "categoria": "Comer",
+    "bairro": "Antas",
+    "endereco": "Rua de Costa Cabral, 587, 4200-223 Porto",
+    "instagram": "",
+    "site": "https://shopinporto.porto.pt/loja/o-benedito/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 41.1660615,
+    "lon": -8.5978166,
+    "geo_src": "nominatim",
+    "cidade": "Porto",
+    "regiao": "europa",
+    "metro": "Portugal",
+    "fonte": "https://shopinporto.porto.pt/loja/o-benedito/"
+  },
+  {
+    "id": "trem-de-minas-londres",
+    "nome": "Trem de Minas",
+    "categoria": "Comer",
+    "bairro": "Wandsworth",
+    "endereco": "189 Garratt Lane, Wandsworth, London SW18 4DR",
+    "instagram": "@tremdeminas_uk",
+    "site": "https://tremdeminas.uk/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 51.4504999,
+    "lon": -0.1897841,
+    "geo_src": "nominatim",
+    "cidade": "Londres",
+    "regiao": "europa",
+    "metro": "Reino Unido",
+    "fonte": "https://tremdeminas.uk/"
+  },
+  {
+    "id": "frigideira-londres",
+    "nome": "Frigideira",
+    "categoria": "Comer",
+    "bairro": "Brondesbury",
+    "endereco": "37 Chamberlayne Road, London NW10 3NB",
+    "instagram": "",
+    "site": "https://frigideira.co.uk/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 51.5318547,
+    "lon": -0.217166,
+    "geo_src": "nominatim",
+    "cidade": "Londres",
+    "regiao": "europa",
+    "metro": "Reino Unido",
+    "fonte": "https://frigideira.co.uk/"
+  },
+  {
+    "id": "filo-brazil-londres",
+    "nome": "Filó Brazil",
+    "categoria": "Comer",
+    "bairro": "Holloway",
+    "endereco": "81 Holloway Road, London N7 8LT",
+    "instagram": "",
+    "site": "https://www.filobraziluk.co.uk/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 51.5476506,
+    "lon": -0.1061027,
+    "geo_src": "nominatim",
+    "cidade": "Londres",
+    "regiao": "europa",
+    "metro": "Reino Unido",
+    "fonte": "https://www.filobraziluk.co.uk/"
+  },
+  {
+    "id": "sabor-gaucho-madrid",
+    "nome": "Sabor Gaucho",
+    "categoria": "Comer",
+    "bairro": "Tetuán",
+    "endereco": "Calle de Orense, 83, 28020 Madrid",
+    "instagram": "",
+    "site": "https://www.saborgauchoespana.com/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 40.459944,
+    "lon": -3.6944896,
+    "geo_src": "nominatim",
+    "cidade": "Madrid",
+    "regiao": "europa",
+    "metro": "Espanha",
+    "fonte": "https://www.saborgauchoespana.com/"
+  },
+  {
+    "id": "tropicalista-madrid",
+    "nome": "Tropicalista",
+    "categoria": "Comer",
+    "bairro": "Gran Vía",
+    "endereco": "Calle de la Ballesta, 2, 28004 Madrid",
+    "instagram": "",
+    "site": "https://tropicalista.es/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 40.4211658,
+    "lon": -3.7035588,
+    "geo_src": "nominatim",
+    "cidade": "Madrid",
+    "regiao": "europa",
+    "metro": "Espanha",
+    "fonte": "https://tropicalista.es/"
+  },
+  {
+    "id": "guanabara-madrid",
+    "nome": "Guanabara",
+    "categoria": "Comer",
+    "bairro": "San Blas",
+    "endereco": "Calle de Medea, 4, 28037 Madrid",
+    "instagram": "",
+    "site": "https://guanabara.es/index.php/guanabara_mad/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 40.4398835,
+    "lon": -3.6233116,
+    "geo_src": "nominatim",
+    "cidade": "Madrid",
+    "regiao": "europa",
+    "metro": "Espanha",
+    "fonte": "https://guanabara.es/index.php/guanabara_mad/"
+  },
+  {
+    "id": "rodizio-o-brazil-paris",
+    "nome": "Rodizio O Brazil",
+    "categoria": "Comer",
+    "bairro": "10.º arrondissement",
+    "endereco": "31 Rue du Faubourg Saint-Martin, 75010 Paris",
+    "instagram": "",
+    "site": "https://rodizio-o-brasil-paris.fr/fr",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 48.8702095,
+    "lon": 2.3561267,
+    "geo_src": "nominatim",
+    "cidade": "Paris",
+    "regiao": "europa",
+    "metro": "França",
+    "fonte": "https://rodizio-o-brasil-paris.fr/fr"
+  },
+  {
+    "id": "rodizio-paris",
+    "nome": "Rodizio Paris",
+    "categoria": "Comer",
+    "bairro": "Paris 15",
+    "endereco": "5 Boulevard Victor, 75015 Paris",
+    "instagram": "",
+    "site": "https://www.rodizio-paris.fr/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 48.8353801,
+    "lon": 2.2816738,
+    "geo_src": "nominatim",
+    "cidade": "Paris",
+    "regiao": "europa",
+    "metro": "França",
+    "fonte": "https://www.rodizio-paris.fr/"
+  },
+  {
+    "id": "uma-nota-paris",
+    "nome": "Uma Nota",
+    "categoria": "Comer",
+    "bairro": "2.º arrondissement",
+    "endereco": "86 Rue Réaumur, 75002 Paris",
+    "instagram": "",
+    "site": "https://uma-nota.com/fr/home/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 48.8667904,
+    "lon": 2.3505377,
+    "geo_src": "nominatim",
+    "cidade": "Paris",
+    "regiao": "europa",
+    "metro": "França",
+    "fonte": "https://uma-nota.com/fr/home/"
+  },
+  {
+    "id": "brasa-dublin",
+    "nome": "Brasa",
+    "categoria": "Comer",
+    "bairro": "North City",
+    "endereco": "6 Ormond Quay Upper, Dublin D07 H324",
+    "instagram": "",
+    "site": "https://brasadublin.ie/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 53.3461037,
+    "lon": -6.2687857,
+    "geo_src": "nominatim",
+    "cidade": "Dublin",
+    "regiao": "europa",
+    "metro": "Irlanda",
+    "fonte": "https://brasadublin.ie/"
+  },
+  {
+    "id": "tia-maria-dublin",
+    "nome": "Tia Maria",
+    "categoria": "Comer",
+    "bairro": "Smithfield",
+    "endereco": "4-6 North King Street, Dublin 7",
+    "instagram": "",
+    "site": "https://www.tiamariadublin.ie/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 53.3507525,
+    "lon": -6.2708389,
+    "geo_src": "nominatim",
+    "cidade": "Dublin",
+    "regiao": "europa",
+    "metro": "Irlanda",
+    "fonte": "https://www.tiamariadublin.ie/"
+  },
+  {
+    "id": "amai-dublin",
+    "nome": "Amai",
+    "categoria": "Comer",
+    "bairro": "Dublin 2",
+    "endereco": "4 Harry Street, Dublin 2, D02 CX24",
+    "instagram": "",
+    "site": "https://www.amaibyviktor.ie/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 53.3412359,
+    "lon": -6.261256,
+    "geo_src": "nominatim",
+    "cidade": "Dublin",
+    "regiao": "europa",
+    "metro": "Irlanda",
+    "fonte": "https://www.amaibyviktor.ie/"
+  },
+  {
+    "id": "tapiocaria-berlim",
+    "nome": "Tapiocaria",
+    "categoria": "Comer",
+    "bairro": "Friedrichshain",
+    "endereco": "Samariterstraße 34A, 10247 Berlin",
+    "instagram": "",
+    "site": "https://tapiocaria.de/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 52.5163204,
+    "lon": 13.4648762,
+    "geo_src": "nominatim",
+    "cidade": "Berlim",
+    "regiao": "europa",
+    "metro": "Alemanha",
+    "fonte": "https://tapiocaria.de/"
+  },
+  {
+    "id": "cafe-do-brasil-berlim",
+    "nome": "Café do Brasil",
+    "categoria": "Comer",
+    "bairro": "Kreuzberg",
+    "endereco": "Dudenstraße 2, 10965 Berlin",
+    "instagram": "",
+    "site": "https://www.cafe-do-brasil.de/anfahrt.html",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 52.4853132,
+    "lon": 13.3854844,
+    "geo_src": "nominatim",
+    "cidade": "Berlim",
+    "regiao": "europa",
+    "metro": "Alemanha",
+    "fonte": "https://www.cafe-do-brasil.de/anfahrt.html"
+  },
+  {
+    "id": "villa-rodizio-berlim",
+    "nome": "Villa Rodizio",
+    "categoria": "Comer",
+    "bairro": "Prenzlauer Berg",
+    "endereco": "Milastraße 2, 10437 Berlin",
+    "instagram": "",
+    "site": "https://www.villa-rodizio.de/impressum.html",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 52.5454568,
+    "lon": 13.4114056,
+    "geo_src": "nominatim",
+    "cidade": "Berlim",
+    "regiao": "europa",
+    "metro": "Alemanha",
+    "fonte": "https://www.villa-rodizio.de/impressum.html"
+  },
+  {
+    "id": "porcao-milao",
+    "nome": "Porcao",
+    "categoria": "Comer",
+    "bairro": "Bovisa",
+    "endereco": "Via Giovanni Battista Varè 23, 20158 Milano",
+    "instagram": "",
+    "site": "https://porcao.it/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 45.5013663,
+    "lon": 9.1623979,
+    "geo_src": "nominatim",
+    "cidade": "Milão",
+    "regiao": "europa",
+    "metro": "Itália",
+    "fonte": "https://porcao.it/"
+  },
+  {
+    "id": "oficina-do-sabor-milao",
+    "nome": "Oficina do Sabor",
+    "categoria": "Comer",
+    "bairro": "Porta Romana",
+    "endereco": "Via Gaetana Agnesi 17, Milano",
+    "instagram": "",
+    "site": "http://oficinadosabor.it/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 45.4492444,
+    "lon": 9.2020565,
+    "geo_src": "nominatim",
+    "cidade": "Milão",
+    "regiao": "europa",
+    "metro": "Itália",
+    "fonte": "http://oficinadosabor.it/"
+  },
+  {
+    "id": "taverna-amazonica-milao",
+    "nome": "Taverna Amazônica",
+    "categoria": "Comer",
+    "bairro": "Sant'Ambrogio",
+    "endereco": "Via Edmondo de Amicis 34, 20123 Milano",
+    "instagram": "",
+    "site": "https://tavernaamazonica.it/faq/",
+    "por": "",
+    "featured": false,
+    "geocode": true,
+    "lat": 45.4595085,
+    "lon": 9.1767586,
+    "geo_src": "nominatim",
+    "cidade": "Milão",
+    "regiao": "europa",
+    "metro": "Itália",
+    "fonte": "https://tavernaamazonica.it/faq/"
   }
 ]

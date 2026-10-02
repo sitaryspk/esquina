@@ -6,14 +6,14 @@
 <title>Esquina — o mapa da coisa brasileira</title>
 <meta name="theme-color" content="#0F7A43"/>
 <meta name="color-scheme" content="light"/>
-<meta name="description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro em Lisboa. E o primeiro mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
+<meta name="description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro na Europa. E o mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
 <meta property="og:title" content="Esquina — o mapa da coisa brasileira"/>
-<meta property="og:description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro em Lisboa. E o primeiro mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
+<meta property="og:description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro na Europa. E o mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
 <meta property="og:type" content="website"/>
 <meta property="og:locale" content="pt_BR"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Esquina — o mapa da coisa brasileira"/>
-<meta name="twitter:description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro em Lisboa. E o primeiro mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
+<meta name="twitter:description" content="Padaria, açaí, salão, dentista, mercearia e rolê brasileiro na Europa. E o mapa nos EUA: Boston, Nova York, Miami e Orlando."/>
 <link rel="icon" href="assets/favicon.png" type="image/png"/>
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -386,7 +386,7 @@ dialog textarea{
       <label class="sr" for="q">Buscar por nome, bairro ou cidade</label>
       <input id="q" type="search" placeholder="Nome, bairro ou cidade" autocomplete="off" enterkeyhint="search"/>
     </div>
-    <div class="metros" id="metros" role="group" aria-label="Cidades nos EUA"></div>
+    <div class="metros" id="metros" role="group" aria-label="Países na Europa"></div>
     <div class="filters" id="filters" role="group" aria-label="Categorias"></div>
   </div>
 </header>
@@ -408,7 +408,7 @@ dialog textarea{
   <div class="dialog-body">
     <p>O contato público, por agora, é este site. Ainda não tem número de WhatsApp nem e-mail.</p>
     <p>Copia a mensagem. Quando existir um contato, ela já está pronta. O destaque de 29€/mês fica só no texto: aqui não tem pagamento.</p>
-    <textarea id="pedido-msg">Oi! Vi o Esquina e quero o pin do meu negócio em Lisboa.</textarea>
+    <textarea id="pedido-msg">Oi! Vi o Esquina e quero o pin do meu negócio na Europa.</textarea>
     <div class="dialog-actions">
       <div id="pagar"></div>
       <button class="ghost" id="fechar" type="button">Fechar</button>
@@ -420,18 +420,35 @@ dialog textarea{
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script>
 const CONFIG = { whatsapp: "", pagamento: "" };
-const MSG = "Oi! Vi o Esquina e quero o pin do meu negócio em Lisboa.";
 const COLORS = {Comer:"#C4232A",Mercado:"#3D2358",Beleza:"#BE185D",Saúde:"#1D4E89",Serviços:"#0E7490","Rolê":"#C2410C"};
 const CATS = ["Todos","Comer","Mercado","Beleza","Saúde","Serviços","Rolê"];
 const METRO_ORDER = ["Boston","Nova York","Miami","Orlando"];
+const COUNTRY_ORDER = ["Portugal","Reino Unido","Espanha","França","Irlanda","Alemanha","Itália"];
+const WHERE = {
+  Portugal: "em Portugal",
+  "Reino Unido": "no Reino Unido",
+  Espanha: "na Espanha",
+  "França": "na França",
+  Irlanda: "na Irlanda",
+  Alemanha: "na Alemanha",
+  "Itália": "na Itália",
+  Lisboa: "em Lisboa",
+  Porto: "em Porto",
+  Londres: "em Londres",
+  Madrid: "em Madrid",
+  Paris: "em Paris",
+  Dublin: "em Dublin",
+  Berlim: "em Berlim",
+  "Milão": "em Milão"
+};
 let PINS = [];
-let region = "lisboa";
+let region = "europa";
 let metro = "todas";
 let current = "Todos";
 let query = "";
 let openId = null;
 
-const map = L.map("map",{zoomControl:false}).setView([38.73,-9.15],12);
+const map = L.map("map",{zoomControl:false}).setView([38.73,-9.15],6);
 L.control.zoom({position:"topright"}).addTo(map);
 L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{
   attribution:"Tiles &copy; Esri", maxZoom:19
@@ -453,7 +470,8 @@ function linkFor(p){
   return "";
 }
 function mapsUrl(p){
-  const bits = [p.endereco || p.nome, p.cidade, p.regiao === "eua" ? "USA" : "Portugal"].filter(Boolean);
+  const country = p.regiao === "eua" ? "USA" : (p.metro || "");
+  const bits = [p.endereco || p.nome, p.cidade, country].filter(Boolean);
   return "https://maps.google.com/?q=" + encodeURIComponent(bits.join(", "));
 }
 function placeLine(p){
@@ -480,7 +498,7 @@ function popup(p){
 }
 function inRegion(p){
   if (p.regiao !== region) return false;
-  if (region === "eua" && metro !== "todas" && p.metro !== metro) return false;
+  if ((region === "eua" || region === "europa") && metro !== "todas" && p.metro !== metro) return false;
   return true;
 }
 function matchesQuery(p){
@@ -497,15 +515,24 @@ function filtered(){
     .filter(p => current === "Todos" || p.categoria === current)
     .sort((a,b) => (b.featured - a.featured) || a.nome.localeCompare(b.nome, "pt"));
 }
+function wherePhrase(){
+  if (region === "eua") return metro !== "todas" ? "em " + metro : "nos EUA";
+  if (metro === "todas") return "na Europa";
+  return WHERE[metro] || ("em " + metro);
+}
+function pinMessage(){
+  return "Oi! Vi o Esquina e quero o pin do meu negócio " + wherePhrase() + ".";
+}
 function lugarLabel(n){
-  const where = region === "lisboa" ? "em Lisboa" : (metro !== "todas" ? "em " + metro : "nos EUA");
+  const where = wherePhrase();
   if (n === 0) return "Nenhum lugar " + where;
   if (n === 1) return "1 lugar " + where;
   return n + " lugares " + where;
 }
 function emptyCopy(){
   if (region === "eua") return "Nada neste lado do mapa. Tenta padaria, açaí, mercearia, Newark ou Orlando.";
-  return "Nada por aqui. Tenta padaria, açaí, salão, dentista, mercearia ou outro bairro.";
+  if (metro !== "todas") return "Nada " + wherePhrase() + " com esse filtro. Tenta outro país, padaria, açaí, salão ou mercearia.";
+  return "Nada por aqui. Tenta outro país, padaria, açaí, salão ou mercearia.";
 }
 function turnStack(){
   const list = document.getElementById("list");
@@ -571,20 +598,24 @@ function render(){
 }
 function fitRegion(){
   const items = PINS.filter(inRegion);
+  if (region === "europa" && metro === "todas"){
+    map.setView([38.73, -9.15], 6);
+    return;
+  }
   if (!items.length){
-    map.setView(region === "lisboa" ? [38.73, -9.15] : [35, -82], region === "lisboa" ? 11 : 4);
+    map.setView(region === "europa" ? [38.73, -9.15] : [35, -82], region === "europa" ? 6 : 4);
     return;
   }
   if (items.length === 1){
     map.setView([items[0].lat, items[0].lon], 14);
     return;
   }
-  map.fitBounds(L.latLngBounds(items.map(p => [p.lat, p.lon])).pad(0.22), {maxZoom: 13});
+  map.fitBounds(L.latLngBounds(items.map(p => [p.lat, p.lon])), {padding:[28,28], maxZoom:13});
 }
 function paintRegions(){
   const box = document.getElementById("regions");
   box.innerHTML = "";
-  [["lisboa","Lisboa"],["eua","EUA"]].forEach(([id, label]) => {
+  [["europa","Europa"],["eua","EUA"]].forEach(([id, label]) => {
     const b = document.createElement("button");
     b.type = "button";
     b.textContent = label;
@@ -606,11 +637,15 @@ function paintRegions(){
 }
 function paintMetros(){
   const box = document.getElementById("metros");
-  const present = METRO_ORDER.filter(name => PINS.some(p => p.regiao === "eua" && p.metro === name));
-  box.classList.toggle("show", region === "eua" && present.length > 1);
+  const europa = region === "europa";
+  const order = europa ? COUNTRY_ORDER : METRO_ORDER;
+  const present = order.filter(name => PINS.some(p => p.regiao === region && p.metro === name));
+  box.classList.toggle("show", present.length > 0);
+  box.setAttribute("aria-label", europa ? "Países na Europa" : "Cidades nos EUA");
   box.innerHTML = "";
-  if (region !== "eua") return;
-  [["todas","Todas as cidades"], ...present.map(name => [name, name])].forEach(([id, label]) => {
+  if (!present.length) return;
+  const todasLabel = europa ? "Todos os países" : "Todas as cidades";
+  [["todas", todasLabel], ...present.map(name => [name, name])].forEach(([id, label]) => {
     const b = document.createElement("button");
     b.type = "button";
     b.textContent = label;
@@ -670,11 +705,12 @@ window.addEventListener("resize", () => map.invalidateSize());
 const pedido = document.getElementById("pedido");
 document.getElementById("cta").addEventListener("click", () => {
   const digits = String(CONFIG.whatsapp || "").replace(/\D/g, "");
+  const msg = pinMessage();
   if (digits){
-    location.href = "https://wa.me/" + digits + "?text=" + encodeURIComponent(MSG);
+    location.href = "https://wa.me/" + digits + "?text=" + encodeURIComponent(msg);
     return;
   }
-  document.getElementById("pedido-msg").value = MSG;
+  document.getElementById("pedido-msg").value = msg;
   syncPay();
   pedido.showModal();
 });
